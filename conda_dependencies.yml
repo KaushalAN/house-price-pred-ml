@@ -1,0 +1,12 @@
+name: house_price_prediction_env
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip:
+      - azureml-core
+      - numpy
+      - pandas
+      - scikit-learn
+      - Flask
+      - gunicorn
