@@ -103,7 +103,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.11'  # Ensure this matches the Python version in Azure App Service
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
@@ -113,10 +113,15 @@ jobs:
     - name: 'Zip Application Content'
       run: zip -r app.zip .
 
+    # Add Azure login action here
+    - name: 'Login to Azure'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'housepriceprediction'  # Replace with your app name
-        slot-name: 'production'           # or the slot name if you're using deployment slots
+        app-name: 'housepriceprediction'
+        slot-name: 'production'
         package: ./app.zip
-
